@@ -19,7 +19,7 @@ $("#submit").on("click", function(event){
 	console.log(now);
 	var	trainName = $("#trainName").val().trim();
 	var	destination = $("#destination").val().trim();
-	var	firstTrainTime = moment( $("#firstTrain").val().trim() ).format('HH:mm');
+	var	firstTrainTime = moment("#firstTrain").format('HHmm');
 	var	nextArrival = moment();
 	var minutesAway;
 	var	frequencyMin = parseInt( $("#frequency").val().trim() );
