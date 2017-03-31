@@ -14,14 +14,16 @@ var database = firebase.database();
 
 $("#submit").on("click", function(event){
 	event.preventDefault();
-	
-		trainName = $("#trainName").val().trim();
-		destination = $("#destination").val().trim();
+
+	var now = moment();
+	console.log(now);
+	var	trainName = $("#trainName").val().trim();
+	var	destination = $("#destination").val().trim();
 		// using moment to grab start 
-		firstTrainTime = moment($("#firstTrain").val().trim()).format('HHmm');
+	var	firstTrainTime = moment($("#firstTrain").val().trim()).format('HHmm');
 		//using .diff to subtract start fros
-		nextArrival = parseInt( moment().diff(moment($("#firstTrain").val().trim()) ) );
-		frequencyMin = parseInt($("#frequency").val());
+	var	nextArrival;
+	var	frequencyMin = parseInt( $("#frequency").val() );
 		
 
 var newTrainInfo = {
@@ -57,7 +59,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   // Store everything into a variable.
   var trainName = childSnapshot.val().name;
   var destination = childSnapshot.val().dest;
-  var firstTrainTime = childSnapshot.val().firsTrain;
+  var firstTrainTime = childSnapshot.val().firstTrain;
   var frequencyMin = childSnapshot.val().frequency;
 
   // Train Info
@@ -69,7 +71,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 	// Add each train's data into the table
   $("#current-trains > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
-  firstTrainTime);
+  frequencyMin);
 
 });
 
