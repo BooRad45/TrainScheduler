@@ -10,7 +10,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// 2. Button for adding Trains
+// 2. Submit button for adding Trains
 
 $("#submit").on("click", function(event){
 	event.preventDefault();
@@ -19,11 +19,10 @@ $("#submit").on("click", function(event){
 	console.log(now);
 	var	trainName = $("#trainName").val().trim();
 	var	destination = $("#destination").val().trim();
-		// using moment to grab start 
-	var	firstTrainTime = $("#firstTrain").val().trim();
-		//using .diff to subtract start fros
-	var	nextArrival;
-	var	frequencyMin = parseInt( $("#frequency").val() );
+	var	firstTrainTime = moment( $("#firstTrain").val().trim() ).format('HH:mm');
+	var	nextArrival = moment();
+	var minutesAway;
+	var	frequencyMin = parseInt( $("#frequency").val().trim() );
 		
 
 var newTrainInfo = {
@@ -31,6 +30,8 @@ var newTrainInfo = {
     dest: destination,
     firstTrain: firstTrainTime,
     frequency: frequencyMin
+    // next: nextArrival,
+    // minutes: minutesAway
   };
 
 console.log(firstTrainTime);
@@ -43,6 +44,8 @@ console.log(firstTrainTime);
   console.log(newTrainInfo.dest);
   console.log(newTrainInfo.firstTrain);
   console.log(newTrainInfo.frequency);
+  console.log(newTrainInfo.next);
+  console.log(newTrainInfo.minutes);
 
   // Alert
   alert("Train successfully added");
@@ -61,17 +64,21 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var destination = childSnapshot.val().dest;
   var firstTrainTime = childSnapshot.val().firstTrain;
   var frequencyMin = childSnapshot.val().frequency;
+  var nextArrival = childSnapshot.val().next;
+  var minutesAway = childSnapshot.val().minutes;
 
   // Train Info
   console.log(trainName);
   console.log(destination);
   console.log(firstTrainTime);
   console.log(frequencyMin);
+  console.log(nextArrival);
+  console.log(minutesAway);
 
 
 	// Add each train's data into the table
   $("#current-trains > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
-  frequencyMin);
+  frequencyMin + "</td><td>" + nextArrival + "</td><td>" + minutesAway);
 
 });
 
