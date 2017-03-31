@@ -20,7 +20,7 @@ $("#submit").on("click", function(event){
 	var	trainName = $("#trainName").val().trim();
 	var	destination = $("#destination").val().trim();
 		// using moment to grab start 
-	var	firstTrainTime = moment($("#firstTrain").val().trim()).format('HHmm');
+	var	firstTrainTime = $("#firstTrain").val().trim();
 		//using .diff to subtract start fros
 	var	nextArrival;
 	var	frequencyMin = parseInt( $("#frequency").val() );
