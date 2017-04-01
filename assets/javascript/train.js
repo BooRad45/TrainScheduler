@@ -10,7 +10,6 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
-var now = moment();
 
 
 // 2. Submit button for adding Trains
@@ -91,6 +90,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var firstTrainTime = childSnapshot.val().firstTrain;
   var frequencyMin = childSnapshot.val().frequency;
   var nextTrain = childSnapshot.val().next;
+  var tMinutesTillTrain = childSnapshot.val().minutes;
 
   // Train Info
   console.log(trainName);
@@ -98,12 +98,13 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(firstTrainTime);
   console.log(frequencyMin);
   console.log(nextTrain);
+  console.log(tMinutesTillTrain);
 
 
 
 	// Add each train's data into the table
   $("#current-trains > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
-  frequencyMin + "</td><td>" + nextTrain + "</td><td>");
+  frequencyMin + "</td><td>" + nextTrain + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 });
 });
 
