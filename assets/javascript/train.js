@@ -1,3 +1,4 @@
+document.on
 var config = {
 	  apiKey: "AIzaSyBiKv7aoS0Mii6icJ9ZAoj2CvYUPAtrNIA",
     authDomain: "train-scheduler-d27cd.firebaseapp.com",
@@ -57,10 +58,10 @@ console.log(firstTrainTime);
 
 });
 
-// // 3. Create Firebase event for adding train to the database and a row in the html when admin adds an entry
-// database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+// 3. Create Firebase event for adding train to the database and a row in the html when admin adds an entry
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
-//   console.log(childSnapshot.val());
+  console.log(childSnapshot.val());
 //   var tFrequency = frequencyMin;
 //     // Time is 3:30 AM
 //     var firstTime = firstTrainTime;
@@ -106,5 +107,5 @@ console.log(firstTrainTime);
 	// Add each train's data into the table
   $("#current-trains > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
   frequencyMin + "</td><td>" + nextArrival + "</td><td>");
-
+});
 
